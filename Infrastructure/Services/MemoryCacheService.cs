@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core.Configurations;
 using Core.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
@@ -37,10 +33,12 @@ namespace Infrastructure.Services
             if (value == null) return false;
             return true;
         }
+
         public T Set<T>(string cacheKey, T value)
         {
             return _memoryCache.Set(cacheKey, value, _cacheOptions);
         }
+
         public void Remove(string cacheKey)
         {
             _memoryCache.Remove(cacheKey);

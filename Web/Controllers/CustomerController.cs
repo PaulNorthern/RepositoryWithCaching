@@ -13,15 +13,18 @@ namespace Web.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerRepository _repository;
+
         public CustomerController(ICustomerRepository repository)
         {
             this._repository = repository;
         }
+
         [HttpGet]
         public async Task<IReadOnlyList<Customer>> Get()
         {
             return await _repository.GetAllAsync();
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> Get(int id)
         {
@@ -32,6 +35,7 @@ namespace Web.Controllers
             }
             return customer;
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Customer customer)
         {
@@ -42,12 +46,14 @@ namespace Web.Controllers
             await _repository.UpdateAsync(customer);
             return NoContent();
         }
+
         [HttpPost]
         public async Task<ActionResult<Customer>> Post(Customer customer)
         {
             await _repository.AddAsync(customer);
             return CreatedAtAction("Get", new { id = customer.Id }, customer);
         }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<Customer>> Delete(int id)
         {
